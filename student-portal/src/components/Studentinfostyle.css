@@ -1,0 +1,20 @@
+.student-card{
+    background-color: rgba(128, 128, 128, 0.361);
+    padding:0.7rem;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:85vw;
+    margin:auto;
+
+}
+.student-card img{
+    margin-bottom: 1.5rem;
+    margin-top: 0.7rem;
+    border-radius: 1rem;
+    width:30%;
+    height: 40%;
+
+}
