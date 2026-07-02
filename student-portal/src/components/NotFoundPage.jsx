@@ -1,7 +1,8 @@
+import './NotFoundstylesheet.css';
 function NotFoundPage(){
     return(
         <>
-        <div>
+        <div className = "notfound">
             <h2>404 --PAGE NOT FOUND</h2>
         </div>
         </>
