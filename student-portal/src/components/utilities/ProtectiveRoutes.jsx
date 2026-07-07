@@ -1,6 +1,6 @@
 import { Outlet , Navigate } from 'react-router-dom';
 const ProtectiveRoutes = ()=>{
-    const user = null;
+    const user = true;
     return user ? <Outlet /> : <Navigate to='/'/>
 }
 
