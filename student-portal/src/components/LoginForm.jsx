@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import {useNavigate} from 'react-router-dom';
 function LoginForm() {
     const navigate = useNavigate();
@@ -6,6 +6,7 @@ function LoginForm() {
     admin : '',
     password : ''
   });
+  const [err , setErr] = useState('')
 
   const handleData = (e)=> {
     updateForm((prev) => ({
@@ -35,6 +36,32 @@ function LoginForm() {
         }
   }
 
+  async function SendData(){
+    try {
+      const URL = 'http://localhost:4000';
+      const response = await fetch(URL , {
+        'Method' : 'POST',
+        'headers' : {
+          'Content-Type' : 'application/json'
+        },
+        'body' : JSON.stringify({
+          admin : form.admin,
+          password : form.password
+
+        })
+      });
+      if(!response.ok){
+        setErr('ERROR OCCURED AT RESPONSE!');
+      }
+      const data = await response.json();
+      
+    } catch (error) {
+      console.error('Error occured :' ,error);
+      
+    }
+
+  }
+
   return (
     <>
     <form onSubmit={(e) => {
@@ -56,6 +83,7 @@ function LoginForm() {
         } else{
             navigate('/student');
         }
+        SendData();
         updateForm({
           admin: '',
           password: '',
@@ -87,12 +115,14 @@ function LoginForm() {
             </tr>
 
             <tr>
-              <td style={{textAlign : 'center'}}><button type = 'submit' onClick={handleClick}>Login</button></td>
+              <td style={{textAlign : 'center'}} onClick={SendData}><button type = 'submit' onClick={handleClick}>Login</button></td>
             </tr>
           </tbody>
         </table>
       </fieldset>
     </form>
+
+    <p>errro here :{err}</p>
     </>
   )
 }
