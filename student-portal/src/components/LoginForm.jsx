@@ -6,7 +6,7 @@ function LoginForm() {
     admin : '',
     password : ''
   });
-  const [err , setErr] = useState('error here')
+  const [err , setErr] = useState('')
 
   const handleData = (e)=> {
     updateForm((prev) => ({
@@ -54,6 +54,7 @@ function LoginForm() {
         setErr('ERROR OCCURED AT RESPONSE!');
       }
       const data = await response.json();
+      setErr(data);
       
     } catch (error) {
       setErr(`Error occured ${error}`);
