@@ -1,12 +1,12 @@
 import { use, useState } from "react"
 import {useNavigate} from 'react-router-dom';
 function LoginForm() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form , updateForm] = useState({
     admin : '',
     password : ''
   });
-  const [err , setErr] = useState('')
+  const [err , setErr] = useState('error here')
 
   const handleData = (e)=> {
     updateForm((prev) => ({
@@ -15,7 +15,7 @@ function LoginForm() {
     }))
   }
 
-  const handleClick = () =>{
+  const handleClick = (e) =>{
     e.preventDefault();
         if(!form.admin.includes('/')){
             alert("Invalid Admission Number");
@@ -40,13 +40,13 @@ function LoginForm() {
     try {
       const URL = 'http://localhost:4000';
       const response = await fetch(URL , {
-        'Method' : 'POST',
-        'headers' : {
+        method : 'POST',
+        headers : {
           'Content-Type' : 'application/json'
         },
-        'body' : JSON.stringify({
-          admin : form.admin,
-          password : form.password
+        body : JSON.stringify({
+          admin : `${form.admin}`,
+          password : `${form.password}`
 
         })
       });
@@ -56,7 +56,7 @@ function LoginForm() {
       const data = await response.json();
       
     } catch (error) {
-      console.error('Error occured :' ,error);
+      setErr(`Error occured ${error}`);
       
     }
 
@@ -100,6 +100,7 @@ function LoginForm() {
               id = 'admin'
               name = 'admin'
               value = {form.admin}
+              placeholder="DIT/2025/40634"
                /></td>
             </tr>
 
@@ -110,6 +111,7 @@ function LoginForm() {
               name = 'password'
               value = {form.password}
               id='password'
+              placeholder="123"
               required              
               /></td>
             </tr>

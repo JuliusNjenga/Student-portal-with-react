@@ -6,9 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post('/LoginForm' , (req , res)=>{
+app.post('/' , (req , res)=>{
     res.json({message : 'data recieved'});
-    console.log(`we recieved ${req.body.admin} password ${req.body.password}`);
+    console.log(`we recieved admission number : ${req.body.admin} password ${req.body.password}`);
 
 })
 
