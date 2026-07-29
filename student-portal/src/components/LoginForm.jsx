@@ -82,7 +82,7 @@ function LoginForm() {
         });
             return;
         } else{
-            navigate('/student');
+            navigate('/studentcard');
         }
         SendData();
         updateForm({
