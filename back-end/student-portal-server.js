@@ -2,18 +2,20 @@ const express = require('express');
 const cors = require('cors');
 const port = 4000;
 const app = express();
+const pool = require('./db');
 
 app.use(cors());
 app.use(express.json());
 
-app.post('/' , async(req , res)=>{
+app.post('/' ,(req , res)=>{
     try {
         const {adimn , password} = req.body;
-        const isAdminValid = admin && admin.includes('/') && /\d/.test(admin);
-        const isPasswordValid = passowrd && password.length > 3;
+        const isAdminValid = !admin && !admin.includes('/') && !/\d/.test(admin);
+        const isPasswordValid = !passowrd && !password.length > 3;
         if(isAdminValid || isPasswordValid){
-            
+            return res.status(404).send({message : 'ERROR IN CREDENTIALS'});            
         }
+      
 
         
     } catch (error) {
