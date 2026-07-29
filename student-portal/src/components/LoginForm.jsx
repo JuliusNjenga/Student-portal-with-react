@@ -1,4 +1,4 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import {useNavigate} from 'react-router-dom';
 function LoginForm() {
   const navigate = useNavigate();
@@ -67,14 +67,14 @@ function LoginForm() {
     <>
     <form onSubmit={(e) => {
         e.preventDefault();
-        if(!form.admin.includes('/')){
+        if(!form.admin || !form.admin.includes('/') || !/\d/.test(form.admin)){
             alert("Invalid Admission Number");
             updateForm({
           admin: '',
           password: ''
         });
             return;
-        } else if(form.password < 3){
+        } else if(!form.password || form.password.length < 3){
             alert('Invalid password');
             updateForm({
           admin: '',
@@ -118,7 +118,7 @@ function LoginForm() {
             </tr>
 
             <tr>
-              <td style={{textAlign : 'center'}} onClick={SendData}><button type = 'submit' onClick={handleClick}>Login</button></td>
+              <td style={{textAlign : 'center'}}><button type = 'submit'>Login</button></td>
             </tr>
           </tbody>
         </table>
