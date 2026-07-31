@@ -9,21 +9,18 @@ app.use(express.json());
 
 app.post('/' ,(req , res)=>{
     try {
-        const {adimn , password} = req.body;
-        const isAdminValid = !admin && !admin.includes('/') && !/\d/.test(admin);
-        const isPasswordValid = !passowrd && !password.length > 3;
+        const {admin , password} = req.body;
+        const isAdminValid = !admin || !admin.includes('/') || !/\d/.test(admin);
+        const isPasswordValid = !password || password.length < 3;
         if(isAdminValid || isPasswordValid){
-            return res.status(404).send({message : 'ERROR IN CREDENTIALS'});            
+            return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
-      
 
         
     } catch (error) {
         return res.status(404).send({message : 'unable to send data' , error});
         
     }
-    
-
 })
 
 const server = app.listen(port , ()=>{

@@ -45,7 +45,7 @@ function LoginForm() {
           'Content-Type' : 'application/json'
         },
         body : JSON.stringify({
-          admin : `${form.admin}`,
+          admin : `${form.admin.toUpperCase()}`,
           password : `${form.password}`
 
         })
@@ -67,7 +67,7 @@ function LoginForm() {
     <>
     <form onSubmit={(e) => {
         e.preventDefault();
-        if(!form.admin || !form.admin.includes('/') || !/\d/.test(form.admin)){
+        if(!form.admin.toUpperCase() || !form.admin.includes('/') || !/\d/.test(form.admin)){
             alert("Invalid Admission Number");
             updateForm({
           admin: '',
