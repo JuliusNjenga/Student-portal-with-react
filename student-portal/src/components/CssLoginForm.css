@@ -1,0 +1,23 @@
+#error{
+    background-color: red;
+    width:17%;
+    padding:0.7rem;
+    border-radius: 0.7rem;
+    position: fixed;
+    bottom: 20px;
+    right:0.5rem;
+    color:white;
+    transition: all .2s ease;
+    z-index: 999;
+    animation: errorAnime .2s ease;
+}
+
+@keyframes errorAnime {
+    from{
+        transform: translateX(100px);
+    }
+    to{
+        transform: translateX(0px);
+    }
+    
+}

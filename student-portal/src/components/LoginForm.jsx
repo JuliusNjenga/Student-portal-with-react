@@ -1,12 +1,13 @@
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom';
+import './CssLoginForm.css';
 function LoginForm() {
   const navigate = useNavigate();
   const [form , updateForm] = useState({
     admin : '',
     password : ''
   });
-  const [err , setErr] = useState('')
+  const [err , setErr] = useState('');
 
   const handleData = (e)=> {
     updateForm((prev) => ({
@@ -15,27 +16,7 @@ function LoginForm() {
     }))
   }
 
-  const handleClick = (e) =>{
-    e.preventDefault();
-        if(!form.admin.includes('/')){
-            alert("Invalid Admission Number");
-            updateForm({
-          admin: '',
-          password:''
-        });
-            return;
-        } else if(form.password < 3){
-            alert('Invalid password');
-            updateForm({
-              admin:'',
-          password: '',
-        });
-            return;
-        } else{
-            navigate('/student');
-        }
-  }
-
+  
   async function SendData(){
     try {
       const URL = 'http://localhost:4000';
@@ -51,14 +32,11 @@ function LoginForm() {
         })
       });
       if(!response.ok){
-        setErr('ERROR OCCURED AT RESPONSE!');
+        setErr(`ERROR OCCURED AT RESPONSE! ${response.status}`);
       }
-      const data = await response.json();
-      setErr(data);
       
     } catch (error) {
-      setErr(`Error occured ${error}`);
-      
+      setErr(`Error occured ${error}`);      
     }
 
   }
@@ -68,14 +46,14 @@ function LoginForm() {
     <form onSubmit={(e) => {
         e.preventDefault();
         if(!form.admin.toUpperCase() || !form.admin.includes('/') || !/\d/.test(form.admin)){
-            alert("Invalid Admission Number");
+            setErr("Invalid Admission Number");
             updateForm({
           admin: '',
           password: ''
         });
             return;
         } else if(!form.password || form.password.length < 3){
-            alert('Invalid password');
+            setErr('Invalid password');
             updateForm({
           admin: '',
           password: '',
@@ -125,7 +103,16 @@ function LoginForm() {
       </fieldset>
     </form>
 
-    <p>errro here :{err}</p>
+    {/* <p id='error'>{err}</p> */}
+
+    {
+      err && <div id = 'error'>{err}</div>
+    }
+
+
+
+
+
     </>
   )
 }
