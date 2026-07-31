@@ -16,10 +16,10 @@ function LoginForm() {
     }))
   }
 
-  
+  const URL = 'http://localhost:4000';
+
   async function SendData(){
     try {
-      const URL = 'http://localhost:4000';
       const response = await fetch(URL , {
         method : 'POST',
         headers : {
@@ -39,6 +39,19 @@ function LoginForm() {
       setErr(`Error occured ${error}`);      
     }
 
+  }
+
+  async function GetData(){
+    try {
+      const response = await fetch(URL);
+      if(!response.ok){
+        setErr(`Error retrieving data ${response.status}`);
+      }
+      const data = await response.json();
+      
+    } catch (error) {
+      setErr(`Error retrieving data${error}`);      
+    }
   }
 
   return (

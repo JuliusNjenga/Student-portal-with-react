@@ -15,13 +15,34 @@ app.post('/' ,(req , res)=>{
         if(isAdminValid || isPasswordValid){
             return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
-
+        
+        const user = await pool.query(
+            'SELECT * FROM STUDENT WHERE ADMISSION_NUMER = $1',
+            [admin]
+        )
         
     } catch (error) {
         return res.status(404).send({message : 'unable to send data' , error});
         
     }
-})
+});
+
+app.get('/' , async(req , res)=>{
+    try {
+        const {admin} = req.body;
+        const user = await pool.query(
+            'SELECT * FROM STUDENT WHERE ADMISSION_NUMER = $1',
+            [admin]
+        )
+        return res.status(200).send(user.rows);
+        
+    } catch (error) {
+        return res.status(400).send({message : 'unable to retrive data'});
+        
+    }
+
+});
+
 
 const server = app.listen(port , ()=>{
     console.log('SERVER RUNNIG A PORT : '  ,port);
