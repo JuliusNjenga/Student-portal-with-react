@@ -33,30 +33,21 @@ function LoginForm() {
       });
       if(!response.ok){
         setErr(`ERROR OCCURED AT RESPONSE! ${response.status}`);
-      }
-      
-    } catch (error) {
-      setErr(`Error occured ${error}`);      
-    }
-
-  }
-
-  async function GetData(){
-    try {
-      const response = await fetch(URL);
-      if(!response.ok){
-        setErr(`Error retrieving data ${response.status}`);
+        return false;
       }
       const data = await response.json();
+      return data;
       
     } catch (error) {
-      setErr(`Error retrieving data${error}`);      
+      setErr(`Error occured ${error}`);  
+      return false;
     }
+
   }
 
   return (
     <>
-    <form onSubmit={(e) => {
+    <form onSubmit={async(e) => {
         e.preventDefault();
         if(!form.admin.toUpperCase() || !form.admin.includes('/') || !/\d/.test(form.admin)){
             setErr("Invalid Admission Number");
@@ -72,10 +63,12 @@ function LoginForm() {
           password: '',
         });
             return;
-        } else{
-            navigate('/studentcard');
         }
-        SendData();
+        const success = await SendData();
+        if(success){
+          navigate('/studentcard' , {state : {student : success}});
+          
+        }
         updateForm({
           admin: '',
           password: '',
