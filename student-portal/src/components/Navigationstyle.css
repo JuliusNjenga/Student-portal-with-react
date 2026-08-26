@@ -1,14 +1,51 @@
+.toggle_menu span{
+    background-color: black;
+    width:2.6rem;
+    height: 0.3rem;
+    border-radius: 0.7rem;
+}
+.toggle_menu{
+    display: flex;
+    flex-direction: column;
+    gap:0.2rem;
+    position: absolute;
+    display: none;
+}
 a{
     text-decoration: none;
     color:black;
+    padding: clamp(0.3rem, 0.5vw, o.7rem);
+    padding-bottom:0.3rem;
+}
+a:hover{
+    border-bottom: 1.2px solid black;
+    color: rgb(67, 67, 67);
 }
 nav{
     display: flex;
     justify-content: space-between;
     padding:0.5rem;
     margin: 0.5rem;
-    /* z-index: 9999999;
-    position: fixed;
-    top:10px;
-    width: 100vw; */
+    background-color: rgba(95, 95, 95, 0.234);
+    padding: clamp(0.7rem,1.4vw,1rem);
+    border-radius: 0.7rem;
+    position: relative;
+    z-index: 999999;
+    
+}
+
+@media (max-width : 450px) {
+    nav{
+        /* justify-content: f; */
+        align-items: flex-end;
+        flex-direction: column;
+        height: 70vw;
+        z-index: 9999999;
+        position: fixed;
+
+    }
+    .toggle_menu{
+        display: flex;
+    }
+    
 }

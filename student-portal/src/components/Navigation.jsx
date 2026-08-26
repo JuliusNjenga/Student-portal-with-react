@@ -4,6 +4,11 @@ import './Navigationstyle.css';
 function Navigation(){
     return(
         <>
+        <div className ='toggle_menu'>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
             <nav>
                 <Link to = '/'>Home</Link>
                 <Link to = '/studentcard'>Student Information</Link>

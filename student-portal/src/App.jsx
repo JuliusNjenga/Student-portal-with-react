@@ -5,6 +5,7 @@ import NotFoundPage from './components/NotFoundPage.jsx';
 import Fees from './components/Fees.jsx';
 import ProtectiveRoutes from './components/utilities/ProtectiveRoutes.jsx';
 import { Routes, Route } from 'react-router-dom';
+import './App.css';
 function App() {
   return (
     <>

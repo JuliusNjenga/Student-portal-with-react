@@ -1,34 +1,15 @@
 import { useState } from 'react';
 import Navigation from './Navigation.jsx';
 import './Studentinfostyle.css';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-function StudentCard({name , course , fees, intake, semester}){
+function StudentCard(){
     const [image , setImage] = useState('/student-image.jpg');
     const[err , setErr] = useState('');
 
     const location = useLocation();
     const student = location.state?.student || {};
     console.log(student);
-
-    // useEffect(()=>{
-    //   console.log(success);
-    // },[success]);
-
-    async function GetData(){
-    try {
-      const response = await fetch(URL);
-      if(!response.ok){
-        setErr(`Error retrieving data ${response.status}`);
-      }
-      const data = await response.json();
-      name = data.name;
-      course = data.course;
-      
-    } catch (error) {
-      setErr(`Error retrieving data${error}`);      
-    }
-  }
 
 
     return(
@@ -44,7 +25,7 @@ function StudentCard({name , course , fees, intake, semester}){
         </div>
 
         {
-            err && <div>{error}</div>
+            err && <div>{err}</div>
         }
         </>
     )
