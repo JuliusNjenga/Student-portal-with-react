@@ -1,6 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom';
-import './CssLoginForm.css';
+
 function LoginForm() {
   const navigate = useNavigate();
   const [form , updateForm] = useState({
@@ -76,7 +76,7 @@ function LoginForm() {
     }}>
       <fieldset>
         <legend>STUDENT PORTAL</legend>
-        <table border={'2px solid black'}>
+        <table>
           <tbody>
             <tr>
               <td><label htmlFor = 'admin'>Admission Number : </label></td>
@@ -102,7 +102,7 @@ function LoginForm() {
             </tr>
 
             <tr>
-              <td style={{textAlign : 'center'}}><button type = 'submit'>Login</button></td>
+              <td><button type = 'submit' id= 'btn'>Login</button></td>
             </tr>
           </tbody>
         </table>
@@ -114,10 +114,6 @@ function LoginForm() {
     {
       err && <div id = 'error'>{err}</div>
     }
-
-
-
-
 
     </>
   )

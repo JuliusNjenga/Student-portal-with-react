@@ -1,3 +1,6 @@
+fieldset{
+    border-radius: 0.7rem;
+}
 #error{
     background-color: red;
     width:17%;
@@ -22,9 +25,9 @@
     
 }
 
-button{
+#btn{
     color: black;
-    background-color: #fff;
+    background-color: greenyellow;
     cursor: pointer;
     border: solid black 1.4px;
     border-radius: 0.55rem;
@@ -37,19 +40,25 @@ button{
     margin: auto;
     transition: all .15s ease-in-out;
 }
-button:hover{
-    background-color: rgb(35, 35, 35);
-    color: white;
-    border: solid white 1.7px;
-    transform: scale(1.15);
+#btn:hover{
+    background-color:rgba(172, 255, 47, 0.555) ;
+    transform: scale(1.05);
 }
-button:active{
-    background-color: grey;
-    color: black;
+#btn:active{
+    background-color: greenyellow;
     transform: scale(0.8);
 }
 input{
     text-align: center;
     border-radius: 0.3rem;
-    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.107);
+    border: 1px solid rgba(255, 255, 255, 0.351);
+    box-shadow: 2px 2px 3px black;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    margin: 0.2rem;
+    transition: all .2s ease;
+}
+input:hover{
+    transform: scale(1.03);
 }

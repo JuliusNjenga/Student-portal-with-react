@@ -1,5 +1,12 @@
 body{
   background-color: rgba(253, 253, 253, 0.229);
   font-size: clamp(0.9rem, 1.7vw, 2rem);
+  background-image: url('dark-student-bg.jpg');
+  background-position: center;
+  height: 100vh;
+  background-size: cover;
+  /* background-attachment: ; */
+  background-repeat: no-repeat;
+  color:white;
   
 }

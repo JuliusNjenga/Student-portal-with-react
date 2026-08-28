@@ -13,24 +13,29 @@
 }
 a{
     text-decoration: none;
-    color:black;
     padding: clamp(0.3rem, 0.5vw, o.7rem);
     padding-bottom:0.3rem;
+    margin: 0.1rem;
+    color: white;
 }
 a:hover{
-    border-bottom: 1.2px solid black;
-    color: rgb(67, 67, 67);
+    border-bottom: 1.2px solid white;
+    /* color: rgb(67, 67, 67); */
 }
 nav{
     display: flex;
     justify-content: space-between;
     padding:0.5rem;
-    margin: 0.5rem;
-    background-color: rgba(95, 95, 95, 0.234);
+    margin: 0.7rem;
+    background-color: rgba(255, 255, 255, 0.107);
+    border: 1px solid rgba(255, 255, 255, 0.351);
+    box-shadow: 2px 2px 3px black;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
     padding: clamp(0.7rem,1.4vw,1rem);
     border-radius: 0.7rem;
-    position: relative;
-    z-index: 999999;
+    /* position: relative;
+    z-index: 999999; */
     
 }
 
