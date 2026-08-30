@@ -1,6 +1,14 @@
-fieldset{
-    border-radius: 0.7rem;
+form{
+    margin: 1.5rem 0.5rem;
 }
+.form_items{
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center;
+    align-items: center;     */
+    
+}
+
 #error{
     background-color: red;
     width:17%;
@@ -26,39 +34,41 @@ fieldset{
 }
 
 #btn{
-    color: black;
-    background-color: greenyellow;
+    padding: 0.5rem 1rem;
+    border-radius: 0.7rem;
+    border: none;
+    box-shadow: -5px -5px 7px white,
+                5px 5px 7px rgb(171, 180, 182);
     cursor: pointer;
-    border: solid black 1.4px;
-    border-radius: 0.55rem;
-    padding: clamp(0.2rem, 0.7vw, 0.7rem);
-    width: clamp(1rem,20vw,3.7rem);
-    height: clamp(0.5rem, 12vw,1.4rem);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    transition: all .15s ease-in-out;
-}
-#btn:hover{
-    background-color:rgba(172, 255, 47, 0.555) ;
-    transform: scale(1.05);
-}
-#btn:active{
-    background-color: greenyellow;
-    transform: scale(0.8);
-}
-input{
-    text-align: center;
-    border-radius: 0.3rem;
-    background-color: rgba(255, 255, 255, 0.107);
-    border: 1px solid rgba(255, 255, 255, 0.351);
-    box-shadow: 2px 2px 3px black;
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    margin: 0.2rem;
     transition: all .2s ease;
 }
+#btn:hover{
+    transform: scale(1.05);
+
+}
+#btn:active{
+    transform: scale(0.8);
+
+}
+
+
+input{
+    border-radius: 0.52rem;
+    border: none;
+    padding: 0.4rem 0.4rem;
+    text-align: center;
+    outline: none;
+    background-color: #e8e8e8;
+    transition: all .2s ease;
+    box-shadow: inset 5px 5px 7px rgb(172, 178, 178),
+                inset -5px -5px 7px rgb(255, 255, 255);
+
+}
+
 input:hover{
     transform: scale(1.03);
+   
+}
+input:active{
+    transform: scale(0.9);
 }

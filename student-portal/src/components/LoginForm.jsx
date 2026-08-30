@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom';
+import './CssLoginForm.css';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -47,6 +48,9 @@ function LoginForm() {
 
   return (
     <>
+    <div>
+      {/* <h1>STUDENT PORTAL</h1> */}
+    </div>
     <form onSubmit={async(e) => {
         e.preventDefault();
         if(!form.admin.toUpperCase() || !form.admin.includes('/') || !/\d/.test(form.admin)){
@@ -74,39 +78,33 @@ function LoginForm() {
           password: '',
         });
     }}>
-      <fieldset>
-        <legend>STUDENT PORTAL</legend>
-        <table>
-          <tbody>
-            <tr>
-              <td><label htmlFor = 'admin'>Admission Number : </label></td>
-              <td><input type="text"
+      {/* <fieldset> */} 
+          <div className="form_items">
+              <label htmlFor = 'admin'>Admission Number </label>
+              <input type="text"
               onChange={handleData}
               id = 'admin'
               name = 'admin'
               value = {form.admin}
               placeholder="DIT/2025/40634"
-               /></td>
-            </tr>
-
-            <tr>
-              <td><label htmlFor = 'password'>Password : </label></td>
-              <td><input type="password"
+               /> <br /> <br />
+            
+              <label htmlFor = 'password'>Password </label>
+              <input type="password"
               onChange={handleData}
               name = 'password'
               value = {form.password}
               id='password'
               placeholder="123"
               required              
-              /></td>
-            </tr>
-
-            <tr>
-              <td><button type = 'submit' id= 'btn'>Login</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </fieldset>
+              /> <br /> <br />
+            </div>
+            
+              <button type = 'submit' id= 'btn'>Login</button>
+            
+         
+        
+      {/* </fieldset> */}
     </form>
 
     {/* <p id='error'>{err}</p> */}

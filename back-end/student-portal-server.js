@@ -31,6 +31,8 @@ app.post('/' , async (req , res)=>{
         if(user.rows.length === 0){
             return res.status(404).send({message  :'student not found'})
         }
+
+        // if(user.student === password)
         
         const student = user.rows[0];
         res.status(200).send(student);
