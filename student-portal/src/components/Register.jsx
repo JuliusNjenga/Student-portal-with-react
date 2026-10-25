@@ -72,15 +72,15 @@ function Register(){
                  /> <br /> <br />
 
                 <label htmlFor="password">Password </label>
-                <input type="text" 
+                <input type="password" 
                 placeholder="123"
                 name = 'password'
                 id = "password"
                 onChange={handleChange}
                 value={setForm.passowrd}
-                />
+                />  <br /> <br />
+                <button type = 'submit'>Create</button>
             </fieldset>
-            <button type = 'submit'>Create</button>
         </form>
         </>
     )

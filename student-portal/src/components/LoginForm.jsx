@@ -48,9 +48,6 @@ function LoginForm() {
 
   return (
     <>
-    <div>
-      {/* <h1>STUDENT PORTAL</h1> */}
-    </div>
     <form onSubmit={async(e) => {
         e.preventDefault();
         if(!form.admin.toUpperCase() || !form.admin.includes('/') || !/\d/.test(form.admin)){
@@ -78,7 +75,8 @@ function LoginForm() {
           password: '',
         });
     }}>
-      {/* <fieldset> */} 
+      <fieldset style ={{borderRadius : '0.7rem' , padding : '1.7rem', margin : '0.7rem'}}> 
+        <legend>Login here</legend>
           <div className="form_items">
               <label htmlFor = 'admin'>Admission Number </label>
               <input type="text"
@@ -101,10 +99,8 @@ function LoginForm() {
             </div>
             
               <button type = 'submit' id= 'btn'>Login</button>
-            
-         
-        
-      {/* </fieldset> */}
+
+      </fieldset>
     </form>
 
     {/* <p id='error'>{err}</p> */}
