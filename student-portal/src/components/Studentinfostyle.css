@@ -4,7 +4,11 @@
     justify-content: center;
     align-items: center;
     width:85vw;
-    margin:auto;
+    margin:1.7rem;
+    border-radius: 0.7rem;
+    padding: 0.7rem;
+        box-shadow: -5px -5px 7px white,
+                5px 5px 7px rgb(171, 180, 182);
 
 }
 /* .student-card img{

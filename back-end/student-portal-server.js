@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const port = 4000;
 const app = express();
+// const bcrypt = require('bcrypt');
 const pool = require('./db');
 
 app.use(cors());
@@ -17,25 +18,30 @@ app.post('/' , async (req , res)=>{
         }
         
         const user = await pool.query(
-            // 'SELECT * FROM STUDENT WHERE ADMISSION_NUMBER = $1',
-            // [admin]
-
             `SELECT s.id, s.admission_number, s.password, 
                     d.student_name AS name, d.course, d.fees_payable AS fees, d.intake, d.semester 
              FROM student s
              JOIN student_details d ON s.id = d.student_id
-             WHERE s.admission_number = $1`, 
-            [admin]
+             WHERE s.admission_number= $1 AND s.password = $2`, 
+            [admin, password]
         )
 
         if(user.rows.length === 0){
             return res.status(404).send({message  :'student not found'})
         }
+        // const compare_password = bcrypt.compare(password, password);
 
         // if(user.student === password)
         
         const student = user.rows[0];
-        res.status(200).send(student);
+        if(!student.password){
+            return res.status(400).send({message : 'Error on password mismatch'});
+        }
+        res.status(200).send({
+            message: 'Success',
+            token:'Fake_token_123',
+            student : student
+        });
         
     } catch (error) {
         return res.status(404).send({message : 'unable to send data' , error});

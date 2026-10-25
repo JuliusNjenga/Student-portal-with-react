@@ -36,8 +36,8 @@ function LoginForm() {
         setErr(`ERROR OCCURED AT RESPONSE! ${response.status}`);
         return false;
       }
-      const data = await response.json();
-      return data;
+      const student = await response.json();
+      return student;
       
     } catch (error) {
       setErr(`Error occured ${error}`);  

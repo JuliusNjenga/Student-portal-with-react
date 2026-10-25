@@ -4,16 +4,17 @@ import './Navigationstyle.css';
 function Navigation(){
     return(
         <>
-        <div className ='toggle_menu'>
+        {/* <div className ='toggle_menu'>
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </div> */}
             <nav>
                 <Link to = '/'>Home</Link>
                 <Link to = '/studentcard'>Student Information</Link>
                 <Link to='/fees'>Fees</Link>
                 <Link to='/unitreg'>Unit registration</Link>
+                <Link to = '/Register'>Register</Link>
                 <Link to ='/signout'>Sign out</Link>
             </nav>
 

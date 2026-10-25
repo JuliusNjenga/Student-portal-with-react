@@ -1,6 +1,7 @@
 import Navigation from './components/Navigation.jsx';
 import LoginForm from './components/LoginForm.jsx';
 import StudentCard from './components/StudentCard.jsx';
+import Register from './components/Register.jsx';
 import NotFoundPage from './components/NotFoundPage.jsx';
 import Fees from './components/Fees.jsx';
 import ProtectiveRoutes from './components/utilities/ProtectiveRoutes.jsx';
@@ -17,6 +18,7 @@ function App() {
 
         <Route path = '/StudentCard' element ={<StudentCard />} />
         <Route path ='/fees' element = {<Fees />}></Route>
+        <Route path='/Register' element = {<Register/>}></Route>
         <Route path = '*' element = {<NotFoundPage />}/>
         
       </Route>

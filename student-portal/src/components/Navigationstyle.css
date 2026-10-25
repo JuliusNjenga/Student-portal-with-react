@@ -1,4 +1,4 @@
-.toggle_menu span{
+/* .toggle_menu span{
     background-color: black;
     width:2.6rem;
     height: 0.3rem;
@@ -10,7 +10,7 @@
     gap:0.2rem;
     position: absolute;
     display: none;
-}
+} */
 a{
     text-decoration: none;
     position: relative;
@@ -75,18 +75,18 @@ nav{
 
 
 
-@media (max-width : 450px) {
-    nav{
+/* @media (max-width : 450px) { */
+    /* nav{ */
         /* justify-content: f; */
-        align-items: flex-end;
+        /* align-items: flex-end;
         flex-direction: column;
         height: 70vw;
         z-index: 9999999;
-        position: fixed;
+        position: fixed; */
 
     }
-    .toggle_menu{
+    /* .toggle_menu{
         display: flex;
-    }
+    } */
     
-}
+/* } */
