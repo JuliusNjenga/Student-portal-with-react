@@ -11,7 +11,7 @@ form{
     display: flex;
     flex-direction: column;
     gap:0.2rem;
-    width:21rem;
+    /* width:21rem; */
     /* width: 25rem; */
     /* padding-left:15rem;
     padding-right:15rem; */
@@ -72,7 +72,8 @@ input{
     border: none;
     padding: 0.4rem 0.4rem;
     text-align: center;
-    width: 85%;
+    width: 18rem;
+    /* max-width: 45%; */
     outline: none;
     background-color: #e8e8e8;
     transition: all .2s ease;
