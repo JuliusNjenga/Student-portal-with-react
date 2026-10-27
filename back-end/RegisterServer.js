@@ -5,15 +5,16 @@ const pool = require('./db.js');
 const route = express.Router();
 const port  = 4000;
 route.use(express.json());
-route.post('/Register' , async(req , res)=>{
+route.use(cors());
+route.post('/' , async(req , res)=>{
     try {
         const {name , admin, password} = req.body;
         const validateCredentials = 
-        name.trim() && name.length > 3 && !/\d/.test(name) && !/\W/.test(name)
+        name && name.length > 3 && !/\d/.test(name) && !/\W/.test(name)
         &&
-        admin.trim() && /\d/.test(admin) && !/\W/.test(admin) && admin.includes('/')
+        admin && /\d/.test(admin) && /\W/.test(admin) && admin.includes('/')
         &&
-        password.trim() && password.length > 3
+        password && password.length > 3
 
         if(!validateCredentials){
             return res.status(400).send({message : 'Invalid credentials'});
