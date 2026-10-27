@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const RegisterRoute = require('./RegisterServer.js');
 const port = 4000;
 const app = express();
 // const bcrypt = require('bcrypt');
@@ -48,6 +49,7 @@ app.post('/' , async (req , res)=>{
         
     }
 });
+app.use('/Register' , RegisterRoute);
 
 // app.get('/studentcard' , async(req , res)=>{
 //     try {

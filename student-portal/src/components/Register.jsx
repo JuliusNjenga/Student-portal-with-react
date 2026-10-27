@@ -1,4 +1,5 @@
 import { useState } from "react";
+import  './CssRegister.css';
 function Register(){
     const [form , setForm] = useState({
         name : '',
@@ -51,8 +52,8 @@ function Register(){
     return(
         <>
         <form onSubmit={handleCreate}>
-            <fieldset style ={{borderRadius : '0.7rem' , padding : '1.7rem', margin : '0.7rem'}}>
-                <legend>Register new student</legend>
+            {/* <fieldset style ={{borderRadius : '0.7rem' , padding : '1.7rem', margin : '0.7rem'}}> */}
+                {/* <legend>Register new student</legend> */}
                 <label htmlFor="name">Name </label>
                 <input type="text"
                 name = "name"
@@ -73,14 +74,14 @@ function Register(){
 
                 <label htmlFor="password">Password </label>
                 <input type="password" 
-                placeholder="123"
+                placeholder="***"
                 name = 'password'
                 id = "password"
                 onChange={handleChange}
                 value={setForm.passowrd}
                 />  <br /> <br />
                 <button type = 'submit'>Create</button>
-            </fieldset>
+            {/* </fieldset> */}
         </form>
         </>
     )

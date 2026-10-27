@@ -75,8 +75,8 @@ function LoginForm() {
           password: '',
         });
     }}>
-      <fieldset style ={{borderRadius : '0.7rem' , padding : '1.7rem', margin : '0.7rem'}}> 
-        <legend>Login here</legend>
+      {/* <fieldset style ={{borderRadius : '0.7rem' , padding : '1.7rem', margin : '0.7rem'}}>  */}
+        {/* <legend>Login here</legend> */}
           <div className="form_items">
               <label htmlFor = 'admin'>Admission Number </label>
               <input type="text"
@@ -93,14 +93,14 @@ function LoginForm() {
               name = 'password'
               value = {form.password}
               id='password'
-              placeholder="123"
+              placeholder="***"
               required              
               /> <br /> <br />
             </div>
             
               <button type = 'submit' id= 'btn'>Login</button>
 
-      </fieldset>
+      {/* </fieldset> */}
     </form>
 
     {/* <p id='error'>{err}</p> */}

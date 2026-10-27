@@ -2,12 +2,10 @@ form{
     display: flex;
     flex-direction: column;
     margin: 1rem;
-    width: 33%;
-    /* gap:1rem; */
-    /* margin:auto; */
-    /* text-align: center; */
-    /* justify-content: center; */
-    /* align-items: center; */
+    border-radius: 0.7rem;
+    padding:2rem 2rem;
+    box-shadow: -5px -5px 7px white,
+                    5px 5px 5px rgb(196, 196, 196);
 }
 .form_items{
     display: flex;
@@ -52,8 +50,11 @@ form{
     box-shadow: -5px -5px 7px white,
                 5px 5px 7px rgb(171, 180, 182);
     cursor: pointer;
-    /* justify-self: flex-start; */
-    margin-right:500px ;
+    justify-self: flex-start;
+    min-width: 9rem;
+    max-width: 13rem;
+    color:rgba(0, 0, 255, 0.921);
+    /* margin-right:500px ; */
     transition: all .2s ease;
 }
 #btn:hover{
@@ -71,6 +72,7 @@ input{
     border: none;
     padding: 0.4rem 0.4rem;
     text-align: center;
+    width: 85%;
     outline: none;
     background-color: #e8e8e8;
     transition: all .2s ease;
