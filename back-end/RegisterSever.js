@@ -1,29 +1,32 @@
-const route = require('express');
-const route = require('cors');
+const express = require('express');
+const cors = require('cors');
 const bcrypt = require('bcrypt');
 const pool = require('./db.js');
-const route = express.Route();
+const route = express.Router();
 const port  = 4000;
-route.use(express());
+route.use(express.json());
 route.post('/Register' , async(req , res)=>{
     try {
-        const {name , registrationNo , password} = req.body;
+        const {name , admin, password} = req.body;
         const validateCredentials = 
         name.trim() && name.length > 3 && !/\d/.test(name) && !/\W/.test(name)
         &&
-        registrationNo.trim() && /\d/.test(registrationNo) && !/\W/.test(registrationNo) && registrationNo.includes('/')
+        admin.trim() && /\d/.test(admin) && !/\W/.test(admin) && admin.includes('/')
         &&
         password.trim() && password.length > 3
 
         if(!validateCredentials){
             return res.status(400).send({message : 'Invalid credentials'});
         }
-        const hashPassword = bcrypt.hash(password , 10);
+        const hashPassword = await bcrypt.hash(password , 10);
         const insertStudent = await pool.query(
-            `INSERT INTO STUDENT (REGISTRATIONNO HASHPASSWORD) VALUES = $1 , $2 RETURNING *`,
-            [admission_number , password]
+            `INSERT INTO STUDENT (ADMISSION_NUMBER, PASSWORD) VALUES ($1 , $2) RETURNING *`,
+            [admin , hashPassword]
         )
-        
+        return res.status(200).send({
+            message : 'Succefully enrolled',
+            student : insertStudent.rows[0]
+        })
     } catch (error) {
         console.error(`route register didnt run ${error}`);
         
