@@ -4,7 +4,7 @@ function Register(){
     const [form , setForm] = useState({
         name : '',
         admin : '',
-        passowrd : ''
+        password : ''
     })
 
     const [input , setInput] = useState('');
@@ -16,7 +16,7 @@ function Register(){
         }))
     }
 
-    const URL = 'https://localhost:4000/register';
+    const URL = 'http://localhost:4000/Register';
     const createStudent = async() =>{
         try {
             const response = await fetch(URL,{
@@ -26,16 +26,21 @@ function Register(){
                 },
                 'body':JSON.stringify({
                     name : `${form.name}`,
-                    registrationNo : `${form.admin}`,
-                    passowrd : `${form.passowrd}`
+                    admin : `${form.admin}`,
+                    password : `${form.password}`
                 })                
             });
             if(!response.ok){
-                alert("error at resp");
+                alert(`error at response ${response.status} ${response.message}`);
             }
             const sentData = await response.json();
-            alert(`Succefully sent ${sentData}`);
-            setInput('');
+            alert(`Succefully sent name ${form.name} admission number ${form.admin}`);
+            console.log(sentData);
+            setForm({
+                name: '',
+                admin:'',
+                password:''
+            })
             
         } catch (error) {
             alert('error');
@@ -45,15 +50,33 @@ function Register(){
 
     const handleCreate = (e)=>{
         e.preventDefault();
+        const validateCredentials = 
+        form.name.trim() && form.name.length >= 3 && !/\d/.test(form.name) && !/\W/.test(form.name)
+        &&
+        form.admin.trim() && /\d/.test(form.admin) && /\W/.test(form.admin) && form.admin.includes('/')
+        &&
+        form.password.trim() && form.password.length >= 3;
+        if(!validateCredentials){
+            alert("error in credentials");
+            setForm({
+                name:'',
+                admin:'',
+                password:''
+            })
+            return;
+        }
         createStudent();
+        setForm({
+            name : '',
+            admin:'',
+            password:''
+        })
     }
 
 
     return(
         <>
         <form onSubmit={handleCreate}>
-            {/* <fieldset style ={{borderRadius : '0.7rem' , padding : '1.7rem', margin : '0.7rem'}}> */}
-                {/* <legend>Register new student</legend> */}
                 <label htmlFor="name">Name </label>
                 <input type="text"
                 name = "name"
@@ -66,7 +89,7 @@ function Register(){
                 <label htmlFor="reg">Admission Number </label>
                 <input type="text"
                 name = 'admin'
-                value = {setForm.admin}
+                value = {form.admin}
                 placeholder="DIT/2025/40634"
                 onChange={handleChange}
                 id = "reg"
@@ -78,10 +101,9 @@ function Register(){
                 name = 'password'
                 id = "password"
                 onChange={handleChange}
-                value={setForm.passowrd}
+                value={form.password}
                 />  <br /> <br />
                 <button type = 'submit'>Create</button>
-            {/* </fieldset> */}
         </form>
         </>
     )
