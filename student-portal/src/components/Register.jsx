@@ -3,7 +3,7 @@ import  './CssRegister.css';
 function Register(){
     const [form , setForm] = useState({
         name : '',
-        registrationNo : '',
+        admin : '',
         passowrd : ''
     })
 
@@ -26,7 +26,7 @@ function Register(){
                 },
                 'body':JSON.stringify({
                     name : `${form.name}`,
-                    registrationNo : `${form.registrationNo}`,
+                    registrationNo : `${form.admin}`,
                     passowrd : `${form.passowrd}`
                 })                
             });
@@ -63,10 +63,10 @@ function Register(){
                 id = 'name'
                  /> <br /> <br />
 
-                <label htmlFor="reg">Registration Number </label>
+                <label htmlFor="reg">Admission Number </label>
                 <input type="text"
-                name = 'registrationNo'
-                value = {setForm.registrationNo}
+                name = 'admin'
+                value = {setForm.admin}
                 placeholder="DIT/2025/40634"
                 onChange={handleChange}
                 id = "reg"
