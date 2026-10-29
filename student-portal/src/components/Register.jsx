@@ -1,5 +1,6 @@
 import { useState } from "react";
 import  './CssRegister.css';
+import { useNavigate } from "react-router-dom";
 function Register(){
     const [form , setForm] = useState({
         name : '',
@@ -15,6 +16,7 @@ function Register(){
             [e.target.name] : e.target.value
         }))
     }
+    const navigate = useNavigate();
 
     const URL = 'http://localhost:4000/Register';
     const createStudent = async() =>{
@@ -32,6 +34,7 @@ function Register(){
             });
             if(!response.ok){
                 alert(`error at response ${response.status} ${response.message}`);
+                return;
             }
             const sentData = await response.json();
             alert(`Succefully sent name ${form.name} admission number ${form.admin}`);
@@ -44,6 +47,7 @@ function Register(){
             
         } catch (error) {
             alert('error');
+            return;
             
         }
     }
@@ -51,11 +55,11 @@ function Register(){
     const handleCreate = (e)=>{
         e.preventDefault();
         const validateCredentials = 
-        form.name.trim() && form.name.length >= 3 && !/\d/.test(form.name) && !/\W/.test(form.name)
+        form.name && form.name.length >= 3 && /^[a-zA-Z\s]+$/.test(form.name)
         &&
-        form.admin.trim() && /\d/.test(form.admin) && /\W/.test(form.admin) && form.admin.includes('/')
+        form.admin && /\d/.test(form.admin) && form.admin.includes('/')
         &&
-        form.password.trim() && form.password.length >= 3;
+        form.password && form.password.length >= 3;
         if(!validateCredentials){
             alert("error in credentials");
             setForm({
@@ -70,7 +74,8 @@ function Register(){
             name : '',
             admin:'',
             password:''
-        })
+        });
+        navigate('/studentcard');
     }
 
 

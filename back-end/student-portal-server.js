@@ -12,19 +12,18 @@ app.use(express.json());
 app.post('/' , async (req , res)=>{
     try {
         const {admin , password} = req.body;
-        const isAdminValid = !admin || !admin.includes('/') || !/\d/.test(admin);
+        const formattedAdmin = admin.toUppercase();
+        const isAdminValid = !formattedAdmin || !formattedAdmin.includes('/') || !/\d/.test(formattedAdmin);
         const isPasswordValid = !password || password.length < 3;
         if(isAdminValid || isPasswordValid){
             return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
         
         const user = await pool.query(
-            `SELECT s.id, s.admission_number, s.password, 
-                    d.student_name AS name, d.course, d.fees_payable AS fees, d.intake, d.semester 
-             FROM student s
-             JOIN student_details d ON s.id = d.student_id
-             WHERE s.admission_number= $1 AND s.password = $2`, 
-            [admin, password]
+                `SELECT * FROM STUDENT s
+                JOIN student_details sd ON s.student_id  = sd.student_id
+                WHERE s.admission_number = $1 AND s.password = $2`,
+                [formattedAdmin, password]
         )
 
         if(user.rows.length === 0){

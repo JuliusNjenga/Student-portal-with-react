@@ -9,12 +9,13 @@ route.use(cors());
 route.post('/' , async(req , res)=>{
     try {
         const {name , admin, password} = req.body;
+        const formattedName = name.toUpperCase();
         const validateCredentials = 
-        name && name.length > 3 && !/\d/.test(name) && !/\W/.test(name)
+        formattedName && formattedName.length >= 3 && /^[a-zA-Z\s]+$/.test(formattedName)
         &&
-        admin && /\d/.test(admin) && /\W/.test(admin) && admin.includes('/')
+        admin && /\d/.test(admin) && admin.includes('/')
         &&
-        password && password.length > 3
+        password && password.length >= 3
 
         if(!validateCredentials){
             return res.status(400).send({message : 'Invalid credentials'});
@@ -23,6 +24,11 @@ route.post('/' , async(req , res)=>{
         const insertStudent = await pool.query(
             `INSERT INTO STUDENT (ADMISSION_NUMBER, PASSWORD) VALUES ($1 , $2) RETURNING *`,
             [admin , hashPassword]
+        );
+        const student_id = insertStudent.rows[0].student_id;
+        await pool.query(`
+            INSERT INTO STUDENT_DETAILS(STUDENT_ID ,STUDENT_NAME) VALUES($1 , $2)`,
+            [student_id ,formattedName]
         )
         return res.status(200).send({
             message : 'Succefully enrolled',
