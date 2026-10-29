@@ -9,11 +9,11 @@ route.use(cors());
 route.post('/' , async(req , res)=>{
     try {
         const {name , admin, password} = req.body;
-        const formattedName = name.toUpperCase();
+        const formattedadmin = admin.toUpperCase();
         const validateCredentials = 
-        formattedName && formattedName.length >= 3 && /^[a-zA-Z\s]+$/.test(formattedName)
+        name && formattedName.length >= 3 && /^[a-zA-Z\s]+$/.test(name)
         &&
-        admin && /\d/.test(admin) && admin.includes('/')
+        formattedadmin && /\d/.test(formattedadmin) && formattedadmin.includes('/')
         &&
         password && password.length >= 3
 
@@ -23,12 +23,12 @@ route.post('/' , async(req , res)=>{
         const hashPassword = await bcrypt.hash(password , 10);
         const insertStudent = await pool.query(
             `INSERT INTO STUDENT (ADMISSION_NUMBER, PASSWORD) VALUES ($1 , $2) RETURNING *`,
-            [admin , hashPassword]
+            [formattedadmin , hashPassword]
         );
         const student_id = insertStudent.rows[0].student_id;
         await pool.query(`
             INSERT INTO STUDENT_DETAILS(STUDENT_ID ,STUDENT_NAME) VALUES($1 , $2)`,
-            [student_id ,formattedName]
+            [student_id ,name]
         )
         return res.status(200).send({
             message : 'Succefully enrolled',
