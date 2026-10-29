@@ -5,7 +5,8 @@ function Fees(){
         <div className = 'fees'>
             <p>Total fees - </p>
             <p>Fees paid - </p>
-            <p>print fee sturcture - </p>
+            <p>Fees pending - </p>
+            {/* <p>print fee sturcture - </p> */}
 
 
         </div>
