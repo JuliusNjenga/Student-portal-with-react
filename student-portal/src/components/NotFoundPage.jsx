@@ -4,6 +4,7 @@ function NotFoundPage(){
         <>
         <div className = "notfound">
             <h2>404 --PAGE NOT FOUND</h2>
+            <h2>WILL BE ADDED SOON</h2>
         </div>
         </>
     )
