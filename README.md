@@ -1,7 +1,7 @@
 # FULL-STACK STUDENT PORTAL
 A full stack web application used to mimic a student portal.
 ## FEATURES
-* Existing users can login with data that is on database only.
+* Existing users can login with data that is stored in database only.
 * Passwords are hashed using bcrypt to protect user and their privacy.
 * Compared hashed password using bcrypt.Compare.
 * Able to register new student and add to Database.
