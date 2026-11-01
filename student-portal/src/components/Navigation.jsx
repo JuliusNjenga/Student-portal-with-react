@@ -15,6 +15,7 @@ function Navigation(){
                 <Link to='/fees'>Fees</Link>
                 <Link to='/unitreg'>Unit registration</Link>
                 <Link to = '/Register'>Register</Link>
+                <Link to = '/Delete'>Delete user</Link>
                 <Link to ='/signout'>Sign out</Link>
             </nav>
 

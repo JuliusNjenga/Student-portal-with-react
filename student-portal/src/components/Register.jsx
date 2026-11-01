@@ -54,8 +54,9 @@ function Register(){
 
     const handleCreate = (e)=>{
         e.preventDefault();
+        const nameNoWhiteSpace = form.name.trim();
         const validateCredentials = 
-        form.name && form.name.length >= 3 && /^[a-zA-Z\s]+$/.test(form.name)
+        nameNoWhiteSpace && nameNoWhiteSpace.length >= 3 && /^[a-zA-Z\s]+$/.test(nameNoWhiteSpace)
         &&
         form.admin && /\d/.test(form.admin) && form.admin.includes('/')
         &&
