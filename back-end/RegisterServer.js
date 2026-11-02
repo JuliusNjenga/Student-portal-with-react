@@ -28,7 +28,7 @@ route.get('/' , async(req, res)=>{
 
 route.post('/' , async(req , res)=>{
     try {
-        const {name , admin, password} = req.body;
+        const {name , course , admin, password} = req.body;
         const formattedName = name.trim();
         const validateCredentials = 
         formattedName && formattedName.length >= 3 && /^[a-zA-Z\s]+$/.test(formattedName)
