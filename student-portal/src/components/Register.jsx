@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import  './CssRegister.css';
 import { useNavigate } from "react-router-dom";
 function Register(){
     const [form , setForm] = useState({
         name : '',
         admin : '',
+        course :'',
         password : ''
-    })
+    });
+
+    const [courses , setCourses] = useState([]);
 
     const [input , setInput] = useState('');
 
@@ -19,6 +22,14 @@ function Register(){
     const navigate = useNavigate();
 
     const URL = 'http://localhost:4000/Register';
+
+    useEffect(()=>{
+        fetch(URL)
+        .then(res => res.json())
+        .then(data => setCourses(data.courses))
+        .catch(error => alert(`Error at get useEffect get courses ${error}`))
+    }, []);
+
     const createStudent = async() =>{
         try {
             const response = await fetch(URL,{
@@ -42,6 +53,7 @@ function Register(){
             setForm({
                 name: '',
                 admin:'',
+                course : '',
                 password:''
             })
             
@@ -66,6 +78,7 @@ function Register(){
             setForm({
                 name:'',
                 admin:'',
+                course : '',
                 password:''
             })
             return;
@@ -74,6 +87,7 @@ function Register(){
         setForm({
             name : '',
             admin:'',
+            course : '',
             password:''
         });
         navigate('/studentcard');
@@ -100,6 +114,19 @@ function Register(){
                 onChange={handleChange}
                 id = "reg"
                  /> <br /> <br />
+
+                    <label htmlFor="">Courses</label>
+                    <select name = 'course' value = {form.course} onChange={handleChange}>
+                        <option value ='' disabled selected>--Select course--</option>
+                        {
+                            courses.map((i , index)=>(
+                                <option key = {index} value = {i.course_id}>{i.course_name}</option>
+                            ))
+                        }
+                    </select>
+                  <br /> <br />
+
+
 
                 <label htmlFor="password">Password </label>
                 <input type="password" 

@@ -6,14 +6,34 @@ const route = express.Router();
 const port  = 4000;
 route.use(express.json());
 route.use(cors());
+
+route.get('/' , async(req, res)=>{
+    try {
+        const getCourses = await pool.query(
+            `SELECT * FROM COURSES ORDER BY COURSE_NAME ASC`
+        );
+        return res.status(200).send({
+            message: 'Successfully fetched',
+            courses : getCourses.rows
+        })
+        
+    } catch (error) {
+        console.log(`Error at get /register`);
+        return res.status(501).send({
+            message: `Error at get /register`
+        });
+        
+    }
+});
+
 route.post('/' , async(req , res)=>{
     try {
         const {name , admin, password} = req.body;
-        const formattedadmin = admin.toUpperCase();
+        const formattedName = name.trim();
         const validateCredentials = 
-        name && formattedName.length >= 3 && /^[a-zA-Z\s]+$/.test(name)
+        formattedName && formattedName.length >= 3 && /^[a-zA-Z\s]+$/.test(formattedName)
         &&
-        formattedadmin && /\d/.test(formattedadmin) && formattedadmin.includes('/')
+        admin && /\d/.test(admin) && admin.includes('/')
         &&
         password && password.length >= 3
 
@@ -23,12 +43,18 @@ route.post('/' , async(req , res)=>{
         const hashPassword = await bcrypt.hash(password , 10);
         const insertStudent = await pool.query(
             `INSERT INTO STUDENT (ADMISSION_NUMBER, PASSWORD) VALUES ($1 , $2) RETURNING *`,
-            [formattedadmin , hashPassword]
+            [admin , hashPassword]
+        );
+        
+        const insertName = await pool.query(
+            `INSERT INTO STUDENT_DETAILS (STUDENT_NAME, COURSE) VALUES($1 , $2)`,
+            [name , course]
+            
         );
         const student_id = insertStudent.rows[0].student_id;
         await pool.query(`
             INSERT INTO STUDENT_DETAILS(STUDENT_ID ,STUDENT_NAME) VALUES($1 , $2)`,
-            [student_id ,name]
+            [student_id ,formattedName]
         )
         return res.status(200).send({
             message : 'Succefully enrolled',
@@ -40,4 +66,5 @@ route.post('/' , async(req , res)=>{
     }
 
 });
+
 module.exports = route;

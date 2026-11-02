@@ -3,7 +3,7 @@ const cors = require('cors');
 const RegisterRoute = require('./RegisterServer.js');
 const port = 4000;
 const app = express();
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const pool = require('./db');
 
 app.use(cors());
@@ -12,7 +12,7 @@ app.use(express.json());
 app.post('/' , async (req , res)=>{
     try {
         const {admin , password} = req.body;
-        const formattedAdmin = admin.toUppercase();
+        const formattedAdmin = admin.trim();
         const isAdminValid = !formattedAdmin || !formattedAdmin.includes('/') || !/\d/.test(formattedAdmin);
         const isPasswordValid = !password || password.length < 3;
         if(isAdminValid || isPasswordValid){
@@ -29,18 +29,20 @@ app.post('/' , async (req , res)=>{
         if(user.rows.length === 0){
             return res.status(404).send({message  :'student not found'})
         }
-        // const compare_password = bcrypt.compare(password, password);
 
-        // if(user.student === password)
-        
-        const student = user.rows[0];
-        if(!student.password){
+        const getHashedPassword = user.rows[0].password;
+        const comparePassword =await bcrypt.compare(password , getHashedPassword);
+        if(!comparePassword){
             return res.status(400).send({message : 'Error on password mismatch'});
+        }else{
+                const student = user.rows[0];
+                res.status(200).send({
+                message: 'Success',
+                student : student
+            });
+
         }
-        res.status(200).send({
-            message: 'Success',
-            student : student
-        });
+        
         
     } catch (error) {
         return res.status(404).send({message : 'unable to send data' , error});
