@@ -5,6 +5,8 @@ const port = 4000;
 const app = express();
 const bcrypt = require('bcrypt');
 const pool = require('./db');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
@@ -18,12 +20,17 @@ app.post('/' , async (req , res)=>{
         if(isAdminValid || isPasswordValid){
             return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
+        const token =  jwt.sign(
+            {admin},
+            process.env.JWT_TOKEN,
+            {expiresIn: '1hr'}
+        );
         
         const user = await pool.query(
                 `SELECT * FROM STUDENT s
                 JOIN student_details sd ON s.student_id  = sd.student_id
-                WHERE s.admission_number = $1 AND s.password = $2`,
-                [formattedAdmin, password]
+                WHERE s.admission_number = $1`,
+                [formattedAdmin]
         )
 
         if(user.rows.length === 0){
@@ -38,7 +45,8 @@ app.post('/' , async (req , res)=>{
                 const student = user.rows[0];
                 res.status(200).send({
                 message: 'Success',
-                student : student
+                student : student,
+                token : token
             });
 
         }

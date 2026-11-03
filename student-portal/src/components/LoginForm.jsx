@@ -1,9 +1,16 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import {useNavigate} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './CssLoginForm.css';
 
 function LoginForm() {
   const navigate = useNavigate();
+  useEffect(()=>{
+    const loginSuccess = JSON.parse(localStorage.getItem('Token'));
+    if(loginSuccess){
+      navigate('/studentcard');
+    }
+  },[]);
   const [form , updateForm] = useState({
     admin : '',
     password : ''
@@ -37,6 +44,8 @@ function LoginForm() {
         return false;
       }
       const student = await response.json();
+      const token = student.token;
+      localStorage.setItem('Token' , JSON.stringify(token));
       return student;
       
     } catch (error) {
@@ -97,8 +106,9 @@ function LoginForm() {
               required              
               /> <br /> <br />
             </div>
+            <p style = {{marginBottom : '0.9rem'}}>Dont have an account<Link to="/Register">click here</Link></p>
             
-              <button type = 'submit' id= 'btn'>Login</button>
+            <button type = 'submit' id= 'btn'>Login</button>
 
       {/* </fieldset> */}
     </form>

@@ -2,6 +2,7 @@ import Navigation from './components/Navigation.jsx';
 import LoginForm from './components/LoginForm.jsx';
 import StudentCard from './components/StudentCard.jsx';
 import Register from './components/Register.jsx';
+import Signout from './components/Signout.jsx';
 import NotFoundPage from './components/NotFoundPage.jsx';
 import Fees from './components/Fees.jsx';
 import ProtectiveRoutes from './components/utilities/ProtectiveRoutes.jsx';
@@ -13,12 +14,14 @@ function App() {
     <Navigation />
     <Routes>
       <Route path ='/' element ={<LoginForm />} />
+      <Route path='/Register' element = {<Register/>}></Route>
 
       <Route element = {<ProtectiveRoutes />}>
 
         <Route path = '/StudentCard' element ={<StudentCard />} />
         <Route path ='/fees' element = {<Fees />}></Route>
-        <Route path='/Register' element = {<Register/>}></Route>
+        {/* <Route path='/Register' element = {<Register/>}></Route> */}
+        <Route path = '/Signout' element = {<Signout/>}></Route>
         <Route path = '*' element = {<NotFoundPage />}/>
         
       </Route>

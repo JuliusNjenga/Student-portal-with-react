@@ -40,6 +40,7 @@ function Register(){
                 'body':JSON.stringify({
                     name : `${form.name}`,
                     admin : `${form.admin}`,
+                    course : `${form.course}`,
                     password : `${form.password}`
                 })                
             });
@@ -50,12 +51,13 @@ function Register(){
             const sentData = await response.json();
             alert(`Succefully sent name ${form.name} admission number ${form.admin}`);
             console.log(sentData);
+            navigate('/studentcard' , {state : {createdStudent : sentData.student}});
             setForm({
                 name: '',
                 admin:'',
                 course : '',
                 password:''
-            })
+            });
             
         } catch (error) {
             alert('error');
@@ -90,7 +92,6 @@ function Register(){
             course : '',
             password:''
         });
-        navigate('/studentcard');
     }
 
 
@@ -115,9 +116,8 @@ function Register(){
                 id = "reg"
                  /> <br /> <br />
 
-                    <label htmlFor="">Courses</label>
                     <select name = 'course' value = {form.course} onChange={handleChange}>
-                        <option value ='' disabled selected>--Select course--</option>
+                        <option value ='' disabled selected>Select course</option>
                         {
                             courses.map((i , index)=>(
                                 <option key = {index} value = {i.course_id}>{i.course_name}</option>
@@ -135,6 +135,7 @@ function Register(){
                 id = "password"
                 onChange={handleChange}
                 value={form.password}
+                required
                 />  <br /> <br />
                 <button type = 'submit'>Create</button>
         </form>
