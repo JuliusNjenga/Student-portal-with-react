@@ -8,17 +8,18 @@ function StudentCard(){
     const[err , setErr] = useState('');
 
     const location = useLocation();
-    const studentdata = location.state?.student || {};
-    // console.log(student);
+    // const studentdata = location.state?.createdStudent || location.state?.student || {};
+    const studentdata = location.state?.student?.student || location.state?.createdStudent || location.state?.student || {};
+    // console.log(studentdata);
 
 
     return(
         <>
         <div className = 'student-card'>
             {/* <img src={image} alt=""image of the student/> */}
-            <p>Student name - {studentdata.name}</p>
-            <p>Course - {studentdata.course}</p>
-            <p>Fees payable - {studentdata.fees}</p>
+            <p>Student name - {studentdata.student_name}</p>
+            <p>Course - {studentdata.course_id}</p>
+            <p>Fees payable - {studentdata.fees_payable}</p>
             <p>Intake - {studentdata.intake}</p>
             <p>Semester - {studentdata.semester}</p>
 
