@@ -34,7 +34,7 @@ app.post('/' , async (req , res)=>{
         // )
 
         const user = await pool.query(
-            `SELECT s.student_id ,s.admission_number FROM STUDENT
+            `SELECT s.student_id ,s.admission_number, s.password FROM STUDENT s
             JOIN STUDENT_DETAILS sd ON s.student_id = sd.student_id
             JOIN COURSES c ON sd.course_id = c.course_id
             WHERE admission_number = $1`,
