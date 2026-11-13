@@ -19,9 +19,9 @@ function App() {
       <Route element = {<ProtectiveRoutes />}>
 
         <Route path = '/StudentCard' element ={<StudentCard />} />
-        <Route path ='/fees' element = {<Fees />}></Route>
+        <Route path ='/fees' element = {<Fees />}/>
         {/* <Route path='/Register' element = {<Register/>}></Route> */}
-        <Route path = '/Signout' element = {<Signout/>}></Route>
+        <Route path = '/Signout' element = {<Signout/>}/>
         <Route path = '*' element = {<NotFoundPage />}/>
         
       </Route>

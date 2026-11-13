@@ -11,7 +11,7 @@ function Navigation(){
         </div> */}
             <nav>
                 <Link to = '/'>Home</Link>
-                <Link to = '/studentcard'>Student Information</Link>
+                <Link to = '/StudentCard'>Student Information</Link>
                 <Link to='/fees'>Fees</Link>
                 <Link to='/unitreg'>Unit registration</Link>
                 <Link to = '/Register'>Register</Link>

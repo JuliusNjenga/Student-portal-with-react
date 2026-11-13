@@ -1,5 +1,8 @@
 import './Feesstyle.css';
+import {useLocation} from 'react-router-dom';
 function Fees(){
+    // const studentdata = location.state?.student || location.state?.createdStudent ||{};
+    // console.log(studentdata);
     return(
         <>
         <div className = 'fees'>

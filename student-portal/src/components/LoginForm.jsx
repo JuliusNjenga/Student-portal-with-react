@@ -5,12 +5,6 @@ import './CssLoginForm.css';
 
 function LoginForm() {
   const navigate = useNavigate();
-  useEffect(()=>{
-    const loginSuccess = JSON.parse(localStorage.getItem('Token'));
-    if(loginSuccess){
-      navigate('/studentcard');
-    }
-  },[]);
   const [form , updateForm] = useState({
     admin : '',
     password : ''
@@ -76,8 +70,7 @@ function LoginForm() {
         }
         const success = await SendData();
         if(success){
-          navigate('/studentcard' , {state : {student : success}});
-          
+          navigate('/StudentCard');          
         }
         updateForm({
           admin: '',
