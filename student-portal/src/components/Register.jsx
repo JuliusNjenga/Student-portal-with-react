@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import  './CssRegister.css';
 import { useNavigate } from "react-router-dom";
 function Register(){
+    const [err , setErr] = useState('');
     const [form , setForm] = useState({
         name : '',
         admin : '',
@@ -27,7 +28,7 @@ function Register(){
         fetch(URL)
         .then(res => res.json())
         .then(data => setCourses(data.courses))
-        .catch(error => alert(`Error at get useEffect get courses ${error}`))
+        .catch(error => setErr(`Error at get useEffect get courses ${error}`))
     }, []);
 
     const createStudent = async() =>{
@@ -45,7 +46,8 @@ function Register(){
                 })                
             });
             if(!response.ok){
-                alert(`error at response ${response.status} ${response.message}`);
+                setErr(`error at response ${response.status} ${response.message}`);
+                // console.error('50')
                 return;
             }
             const sentData = await response.json();
@@ -60,7 +62,7 @@ function Register(){
             });
             
         } catch (error) {
-            alert('error');
+            setErr('error');
             return;
             
         }
@@ -76,7 +78,7 @@ function Register(){
         &&
         form.password && form.password.length >= 3;
         if(!validateCredentials){
-            alert("error in credentials");
+            setErr("error in credentials");
             setForm({
                 name:'',
                 admin:'',
@@ -139,6 +141,9 @@ function Register(){
                 />  <br /> <br />
                 <button type = 'submit'>Create</button>
         </form>
+        {
+            err && <div id = 'RegisterError'>{err}</div>
+        }
         </>
     )
 }
