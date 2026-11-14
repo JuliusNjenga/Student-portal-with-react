@@ -5,6 +5,7 @@ const port = 4000;
 const app = express();
 const bcrypt = require('bcrypt');
 const pool = require('./db.js');
+const StudentCard = require('./StudentCardServer.js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -33,13 +34,13 @@ app.post('/' , async (req , res)=>{
         //         [formattedAdmin]
         // )
 
-        const user = await pool.query(
-            `SELECT s.student_id ,s.admission_number, s.password FROM STUDENT s
-            JOIN STUDENT_DETAILS sd ON s.student_id = sd.student_id
-            JOIN COURSES c ON sd.course_id = c.course_id
-            WHERE admission_number = $1`,
-            [formattedAdmin]
-        );
+        // const user = await pool.query(
+        //     `SELECT s.student_id ,s.admission_number, s.password FROM STUDENT s
+        //     JOIN STUDENT_DETAILS sd ON s.student_id = sd.student_id
+        //     JOIN COURSES c ON sd.course_id = c.course_id
+        //     WHERE admission_number = $1`,
+        //     [formattedAdmin]
+        // );
 
         // const getCourse = user.rows[0].course_id;
 
@@ -47,6 +48,13 @@ app.post('/' , async (req , res)=>{
         //     `SELECT COURSE_NAME FROM COURSES WHERE COURSE_ID = $1`,
         //     [getCourse]
         // )
+
+        const user = await pool.query(
+            `SELECT ADMISSON_NUMBER FROM STUDENT
+            WHERE ADMISSION_NUMBER = $1`,
+            [formattedAdmin]
+        )
+        
 
         if(user.rows.length === 0){
             return res.status(404).send({message  :'student not found'})
@@ -57,15 +65,15 @@ app.post('/' , async (req , res)=>{
         if(!comparePassword){
             return res.status(400).send({message : 'Error on password mismatch'});
         }else{
-             const token =  jwt.sign(
-                    {admin},
-                    process.env.JWT_TOKEN,
-                    {expiresIn: '1hr'}
-                    );
+            //  const token =  jwt.sign(
+            //         {admin},
+            //         process.env.JWT_TOKEN,
+            //         {expiresIn: '1hr'}
+            //         );
                 const student = user.rows[0];
                 res.status(200).send({
                 message: 'Success',
-                student : student,
+                // student : student,
                 // Course : joinCourses,
                 token : token
             });
@@ -78,6 +86,8 @@ app.post('/' , async (req , res)=>{
         
     }
 });
+
+app.use('/StudentCard' , StudentCard);
 
 app.use('/Register' , RegisterRoute);
 

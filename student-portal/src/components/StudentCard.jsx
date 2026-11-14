@@ -10,8 +10,8 @@ function StudentCard(){
 
     useEffect(()=>{
         const token = JSON.parse(localStorage.getItem('Token'));
-        fetch('http://localhost:4000' , {
-            "method" : 'POST',
+        fetch('http://localhost:4000/StudentCard' , {
+            "method" : 'GET',
             "headers" :{
                 'Authorization' : `BEARER ${token}`
             }
