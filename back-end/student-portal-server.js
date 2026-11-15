@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const RegisterRoute = require('./RegisterServer.js');
+const StudentCard = require('./StudentCardServer.js');
 const port = 4000;
 const app = express();
 const bcrypt = require('bcrypt');
@@ -24,7 +25,7 @@ app.post('/login' , async (req , res)=>{
             return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
         const token =  jwt.sign(
-            {admin},
+            {formattedAdmin},
             process.env.JWT_TOKEN,
             {expiresIn: '1hr'}
         );
@@ -63,6 +64,7 @@ app.post('/login' , async (req , res)=>{
         
     }
 });
+app.use('/StudentCard' , StudentCard);
 
 app.use('/Register' , RegisterRoute);
 
