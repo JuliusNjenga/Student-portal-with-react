@@ -8,19 +8,19 @@ function StudentCard(){
     const[err , setErr] = useState('');
     const [student , setStudent] = useState('');
 
-    useEffect(()=>{
-        const token = JSON.parse(localStorage.getItem('Token'));
-        fetch('http://localhost:4000/StudentCard' , {
-            "method" : 'GET',
-            "headers" :{
-                'Authorization' : `BEARER ${token}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => setStudent(data))
-        .catch(error => setErr(error));
-        console.log(student);
-    }, [])
+    // useEffect(()=>{
+    //     const token = JSON.parse(localStorage.getItem('Token'));
+    //     fetch('http://localhost:4000/StudentCard' , {
+    //         "method" : 'GET',
+    //         "headers" :{
+    //             'Authorization' : `BEARER ${token}`
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => setStudent(data))
+    //     .catch(error => setErr(error));
+    //     console.log(student);
+    // }, [])
 
     // const location = useLocation();
     // const studentdata = location.state?.createdStudent || location.state?.student || {};

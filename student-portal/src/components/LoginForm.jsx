@@ -18,7 +18,7 @@ function LoginForm() {
     }))
   }
 
-  const URL = 'http://localhost:4000';
+  const URL = 'http://localhost:4000/login';
 
   async function SendData(){
     try {
@@ -28,19 +28,21 @@ function LoginForm() {
           'Content-Type' : 'application/json'
         },
         body : JSON.stringify({
-          admin : `${form.admin.toUpperCase()}`,
+          admin : `${form.admin.toUpperCase().trim()}`,
           password : `${form.password}`
 
         })
       });
       if(!response.ok){
         setErr(`ERROR OCCURED AT RESPONSE! ${response.status}`);
+        // console.log(`${response.message}`);
         return false;
       }
       const student = await response.json();
       const token = student.token;
+      console.log(token)
       localStorage.setItem('Token' , JSON.stringify(token));
-      return student;
+      // return student;
       
     } catch (error) {
       setErr(`Error occured ${error}`);  

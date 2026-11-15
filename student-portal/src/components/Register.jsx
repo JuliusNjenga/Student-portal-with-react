@@ -39,7 +39,7 @@ function Register(){
                 },
                 'body':JSON.stringify({
                     name : `${form.name}`,
-                    admin : `${form.admin}`,
+                    admin : `${form.admin.toUpperCase().trim()}`,
                     course : `${form.course}`,
                     password : `${form.password}`
                 })                
@@ -51,7 +51,7 @@ function Register(){
             const sentData = await response.json();
             alert(`Succefully sent name ${form.name} admission number ${form.admin}`);
             console.log(sentData);
-            navigate('/StudentCard' , {state : {createdStudent : sentData.student}});
+            navigate('/StudentCard');
             setForm({
                 name: '',
                 admin:'',
