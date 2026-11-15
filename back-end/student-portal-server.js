@@ -11,15 +11,19 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-app.post('/' , async (req , res)=>{
+app.post('/login' , async (req , res)=>{
     try {
+        // console.log('code starts here');
         const {admin , password} = req.body;
         const formattedAdmin = admin.trim();
         const isAdminValid = !formattedAdmin || !formattedAdmin.includes('/') || !/\d/.test(formattedAdmin);
         const isPasswordValid = !password || password.length < 3;
+
+
         if(isAdminValid || isPasswordValid){
             return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
+<<<<<<< HEAD
         const token =  jwt.sign(
             {admin},
             process.env.JWT_TOKEN,
@@ -31,12 +35,19 @@ app.post('/' , async (req , res)=>{
                 JOIN student_details sd ON s.student_id  = sd.student_id
                 WHERE s.admission_number = $1`,
                 [formattedAdmin]
+=======
+         const user = await pool.query(
+            `SELECT * FROM STUDENT
+            WHERE admission_number = $1`,
+            [formattedAdmin]
+>>>>>>> fixRefresh
         )
 
         if(user.rows.length === 0){
             return res.status(404).send({message  :'student not found'})
         }
 
+<<<<<<< HEAD
         const getHashedPassword = user.rows[0].password;
         const comparePassword =await bcrypt.compare(password , getHashedPassword);
         if(!comparePassword){
@@ -51,13 +62,45 @@ app.post('/' , async (req , res)=>{
 
         }
         
+=======
+        const token =  jwt.sign(
+           {formattedAdmin},
+           process.env.JWT_TOKEN,
+           {expiresIn: '1hr'}
+        );
+
+        const getHashedPassword = user.rows[0].password;
+        const comparePassword =await bcrypt.compare(password , getHashedPassword);
+        if(comparePassword){
+            return res.status(200).send({ 
+            message: `student found ${user.rows[0].admission_number}`,
+            student: user.rows[0],
+            admin: formattedAdmin,
+            token: token
+        })
+        }else{
+            return res.status(400).send({message: 'password mismatch'});
+        }
+
+        return res.status(500).send({message: 'student not found'})
+   
+    
+>>>>>>> fixRefresh
         
     } catch (error) {
-        return res.status(404).send({message : 'unable to send data' , error});
+        // console.log('catch block');
+        // const {admin , password} = req.body
+        // console.log(admin , password);
+        return res.status(400).send({message : 'unable to send data' , error});
         
     }
 });
 
+<<<<<<< HEAD
+=======
+app.use('/StudentCard' , StudentCard);
+
+>>>>>>> fixRefresh
 app.use('/Register' , RegisterRoute);
 
 

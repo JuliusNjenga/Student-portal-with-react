@@ -20,6 +20,7 @@ button:active{
     transform: scale(0.8);
 
 }
+<<<<<<< HEAD
 #RegisterError{
     background-color: red;
     width:17%;
@@ -43,6 +44,8 @@ button:active{
     }
     
 }
+=======
+>>>>>>> fixRefresh
 select{
     width: 21vw;
     /* text-align: center; */

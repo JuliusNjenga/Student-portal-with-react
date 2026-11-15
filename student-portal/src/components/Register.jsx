@@ -28,7 +28,11 @@ function Register(){
         fetch(URL)
         .then(res => res.json())
         .then(data => setCourses(data.courses))
+<<<<<<< HEAD
         .catch(error => setErr(`Error at get useEffect get courses ${error}`))
+=======
+        .catch(error => alert(`Error at get useEffect get courses ${error}`))
+>>>>>>> fixRefresh
     }, []);
 
     const createStudent = async() =>{
@@ -40,20 +44,32 @@ function Register(){
                 },
                 'body':JSON.stringify({
                     name : `${form.name}`,
+<<<<<<< HEAD
                     admin : `${form.admin}`,
+=======
+                    admin : `${form.admin.toUpperCase().trim()}`,
+>>>>>>> fixRefresh
                     course : `${form.course}`,
                     password : `${form.password}`
                 })                
             });
             if(!response.ok){
+<<<<<<< HEAD
                 setErr(`error at response ${response.status} ${response.message}`);
                 // console.error('50')
+=======
+                alert(`error at response ${response.status} ${response.message}`);
+>>>>>>> fixRefresh
                 return;
             }
             const sentData = await response.json();
             alert(`Succefully sent name ${form.name} admission number ${form.admin}`);
             console.log(sentData);
+<<<<<<< HEAD
             navigate('/studentcard' , {state : {createdStudent : sentData.student}});
+=======
+            navigate('/StudentCard');
+>>>>>>> fixRefresh
             setForm({
                 name: '',
                 admin:'',
@@ -62,7 +78,11 @@ function Register(){
             });
             
         } catch (error) {
+<<<<<<< HEAD
             setErr('error');
+=======
+            alert('error');
+>>>>>>> fixRefresh
             return;
             
         }
@@ -78,7 +98,11 @@ function Register(){
         &&
         form.password && form.password.length >= 3;
         if(!validateCredentials){
+<<<<<<< HEAD
             setErr("error in credentials");
+=======
+            alert("error in credentials");
+>>>>>>> fixRefresh
             setForm({
                 name:'',
                 admin:'',
