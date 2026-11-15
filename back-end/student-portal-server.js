@@ -5,10 +5,10 @@ const port = 4000;
 const app = express();
 const bcrypt = require('bcrypt');
 const pool = require('./db.js');
-// const StudentCard = require('./StudentCardServer.js');
+const StudentCard = require('./StudentCardServer.js');
 const jwt = require('jsonwebtoken');
 // const { use } = require('react');
-// require('dotenv').config();
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
@@ -17,30 +17,19 @@ app.post('/login' , async (req , res)=>{
     try {
         // console.log('code starts here');
         const {admin , password} = req.body;
-        const formattedAdmin = admin.toUppercase().trim();
+        const formattedAdmin = admin.trim();
         const isAdminValid = !formattedAdmin || !formattedAdmin.includes('/') || !/\d/.test(formattedAdmin);
         const isPasswordValid = !password || password.length < 3;
 
-        // console.log('code ends here' , formattedAdmin);
-
-        // const token =  jwt.sign(
-        //    {formattedAdmin},
-        //    process.env.JWT_TOKEN,
-        //    {expiresIn: '1hr'}
-        // );
 
         if(isAdminValid || isPasswordValid){
             return res.status(400).send({message : 'ERROR IN CREDENTIALS'});            
         }
-        // console.log("ABOUT TO QUERY DATABASE");
          const user = await pool.query(
-            `SELECT admission_number , password FROM STUDENT
+            `SELECT * FROM STUDENT
             WHERE admission_number = $1`,
             [formattedAdmin]
         )
-        // console.log("DATABASE QUERY FINISHED");
-        // console.log('login' , formattedAdmin);
-        // console.log('result is :' , user.rows);
 
         if(user.rows.length === 0){
             return res.status(404).send({message  :'student not found'})
@@ -57,6 +46,8 @@ app.post('/login' , async (req , res)=>{
         if(comparePassword){
             return res.status(200).send({ 
             message: `student found ${user.rows[0].admission_number}`,
+            student: user.rows[0],
+            admin: formattedAdmin,
             token: token
         })
         }else{
@@ -71,12 +62,12 @@ app.post('/login' , async (req , res)=>{
         // console.log('catch block');
         // const {admin , password} = req.body
         // console.log(admin , password);
-        return res.status(404).send({message : 'unable to send data' , error});
+        return res.status(400).send({message : 'unable to send data' , error});
         
     }
 });
 
-// app.use('/StudentCard' , StudentCard);
+app.use('/StudentCard' , StudentCard);
 
 app.use('/Register' , RegisterRoute);
 

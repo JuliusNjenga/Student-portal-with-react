@@ -28,7 +28,7 @@ function LoginForm() {
           'Content-Type' : 'application/json'
         },
         body : JSON.stringify({
-          admin : `${form.admin.toUpperCase().trim()}`,
+          admin : `${form.admin.toUpperCase()}`,
           password : `${form.password}`
 
         })
@@ -40,9 +40,9 @@ function LoginForm() {
       }
       const student = await response.json();
       const token = student.token;
-      console.log(token)
+      // console.log(student , token);
       localStorage.setItem('Token' , JSON.stringify(token));
-      // return student;
+      return student;
       
     } catch (error) {
       setErr(`Error occured ${error}`);  
