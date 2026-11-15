@@ -2,12 +2,12 @@ const express = require('express');
 const port = 4000;
 const pool = require('./db.js');
 const route = express.Router();
-route.post('/' , async(req , res)=>{
+route.get('/:admin' , async(req , res)=>{
     try {
-        const {admin} = req.body;
-        console.log(admin)
+        const {admin} = req.params;
+        // console.log(admin);
         const user = await pool.query(
-            `SELECT ADMISSION_NUMBER FROM STUDENT s
+            `SELECT s.*, sd.*, c.* FROM STUDENT s
             JOIN STUDENT_DETAILS sd ON s.student_id = sd.student_id
             JOIN COURSES c ON sd.course_id = c.course_id
             WHERE ADMISSION_NUMBER = $1`,
@@ -23,8 +23,8 @@ route.post('/' , async(req , res)=>{
          return res.status(200).send({
             message: 'success',
             student_name : studentData.student_name,
-            student_intake : studentData.student_intake,
-            student_semester : studentData.student_semester,
+            student_intake : studentData.intake,
+            student_semester : studentData.semester,
             student_fees : studentData.fees_payable,
             student_course : studentData.course_name
 
