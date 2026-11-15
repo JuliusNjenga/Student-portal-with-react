@@ -46,10 +46,6 @@ function LoginForm() {
       }
       const student = await response.json();
       const token = student.token;
-<<<<<<< HEAD
-=======
-      // console.log(student , token);
->>>>>>> fixRefresh
       localStorage.setItem('Token' , JSON.stringify(token));
       return student;
       

@@ -37,32 +37,21 @@ function StudentCard(){
     }
 }, []);
 
-<<<<<<< HEAD
     const location = useLocation();
     // const studentdata = location.state?.createdStudent || location.state?.student || {};
     const studentdata = location.state?.student?.student || location.state?.createdStudent || location.state?.student || {};
     // console.log(studentdata);
-=======
->>>>>>> fixRefresh
 
 
     return(
         <>
         <div className = 'student-card'>
             {/* <img src={image} alt=""image of the student/> */}
-<<<<<<< HEAD
             <p>Student name - {studentdata.student_name}</p>
             <p>Course - {studentdata.course_id}</p>
             <p>Fees payable - {studentdata.fees_payable}</p>
             <p>Intake - {studentdata.intake}</p>
             <p>Semester - {studentdata.semester}</p>
-=======
-            <p>Student name - {student.student_name}</p>
-            <p>Course - {student.student_course}</p>
-            <p>Fees payable - {student.student_fees}</p>
-            <p>Intake - {student.student_intake}</p>
-            <p>Semester - {student.student_semester}</p>
->>>>>>> fixRefresh
 
         </div>
 
