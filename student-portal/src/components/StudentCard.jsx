@@ -1,3 +1,4 @@
+// localStorage.removeItem('Token');
 import { useState , useEffect } from 'react';
 import Navigation from './Navigation.jsx';
 import './Studentinfostyle.css';
