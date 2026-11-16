@@ -5,6 +5,7 @@ import Register from './components/Register.jsx';
 import Signout from './components/Signout.jsx';
 import NotFoundPage from './components/NotFoundPage.jsx';
 import Fees from './components/Fees.jsx';
+import Delete from './components/Delete.jsx';
 import ProtectiveRoutes from './components/utilities/ProtectiveRoutes.jsx';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path ='/' element ={<LoginForm />} />
       <Route path='/Register' element = {<Register/>}></Route>
+      <Route path = '/Delete' element = {<Delete />}></Route>
 
       <Route element = {<ProtectiveRoutes />}>
 

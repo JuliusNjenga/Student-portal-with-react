@@ -5,7 +5,6 @@ const route = express.Router();
 route.get('/:admin' , async(req , res)=>{
     try {
         const {admin} = req.params;
-        // console.log(admin);
         const user = await pool.query(
             `SELECT s.*, sd.*, c.* FROM STUDENT s
             JOIN STUDENT_DETAILS sd ON s.student_id = sd.student_id

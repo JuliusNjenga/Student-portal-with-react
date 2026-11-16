@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const RegisterRoute = require('./RegisterServer.js');
 const StudentCard = require('./StudentCardServer.js');
+const DeleteRoute = require('./DeleteServer.js');
 const port = 4000;
 const app = express();
 const bcrypt = require('bcrypt');
@@ -67,6 +68,8 @@ app.post('/login' , async (req , res)=>{
 app.use('/StudentCard' , StudentCard);
 
 app.use('/Register' , RegisterRoute);
+
+app.use('/Delete' , DeleteRoute);
 
 
 const server = app.listen(port , ()=>{
