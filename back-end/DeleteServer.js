@@ -19,12 +19,12 @@ route.delete('/' , async(req , res)=>{
         }
 
         const getPassword = getUser.rows[0].password;
-        const comparePassword = bcrypt.compare(password , getPassword);
+        const comparePassword = await bcrypt.compare(password , getPassword);
         if(!comparePassword){
             return res.status(400).send({message : 'password mismatch'});
         }
         const DeleteStudent = `DELETE FROM STUDENT WHERE STUDENT_ID = $1`;
-        const Delete = await pool.query(DeleteStudent , [getUser.student_id]);
+        const Delete = await pool.query(DeleteStudent , [getUser.rows[0].student_id]);
         
         return res.status(200).send({ message: 'Student succefully deleted'})
         

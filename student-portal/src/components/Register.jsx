@@ -52,7 +52,7 @@ function Register(){
             }
             const sentData = await response.json();
             alert(`Succefully sent name ${form.name} admission number ${form.admin}`);
-            console.log(sentData);
+            // console.log(sentData);
             navigate('/studentcard' , {state : {createdStudent : sentData.student}});
             setForm({
                 name: '',

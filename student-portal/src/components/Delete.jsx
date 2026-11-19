@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Delete(){
+    const navigate = useNavigate();
     const [form , Updateform] = useState({
         admin: '',
         password: '',
@@ -16,8 +18,15 @@ function Delete(){
 
     const URL = 'http://localhost:4000/Delete';
 
+
+
     const Delete = async(e) =>{
         e.preventDefault();
+        const isCredntialsOk = form.admin.trim() && form.password.trim();
+        if(!isCredntialsOk){
+            alert('No value in input');
+            return;
+        }
         try {
             const response = await fetch(URL , {
             "method" : "DELETE",
@@ -32,8 +41,13 @@ function Delete(){
         if(!response.ok){
             alert(`Error at response ${response.status}`);
         }
-        const data = response.json();
-        alert(`Student deleted ${data.message}`);
+        const data = await response.json();
+        alert(`${data.message}`);
+        navigate('/');
+        // confirm('Are you sure you want to delete');
+        // if(confirm == true){
+        //     alert(`student deleted ${data.message}`);
+        // }
         Updateform({
             admin:'',
             password:''
